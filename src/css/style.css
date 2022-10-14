@@ -1,0 +1,148 @@
+@import url(global.css);
+
+
+.container{
+    background-color: rgb(216, 220, 225);
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 2.5fr;
+    padding: 5rem;
+}
+
+/*left content*/
+
+.box-1{
+    background-color: white;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 1rem 0 0 1rem;
+}
+
+.box-1 .header{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.box-1 .header h1{
+    font-size: 2.5rem;
+}
+
+.box-1 .header .search{
+    margin-left: 1rem;
+    width: 100%;
+    border: .2rem solid rgb(213, 219, 224);
+    padding: .5rem .5rem .5rem .5rem;
+    border-radius: .5rem;
+}
+
+.box-1 .header .search input{
+    height: 100%;
+    width: 100%;
+    background: none;
+    font-size: 1.8rem;
+}
+
+.box-1 .main{
+    text-align: center;
+}
+
+.box-1 .main h1{
+    font-size: 5rem;
+    font-weight: 600;
+}
+
+.box-1 .main p{
+    color: rgb(146, 150, 153);
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    font-size: 2rem;
+}
+ .box-1 .footer{
+    padding-top: 2rem;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+}
+ .box-1 .footer .footer-card{
+    padding: 1rem;
+}
+
+.box-1 .footer .footer-card p:first-child{
+    color:rgb(146, 150, 153);
+    padding-bottom: 1rem;
+    font-size: 2rem;
+}
+
+.box-1 .footer p {
+    font-size: 2.5rem;
+}
+
+/*right content*/
+
+.box-2{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(245, 246, 247);
+    border-radius: 0rem 1rem 1rem 0rem;
+    padding: 5rem;
+    justify-content: space-between;
+}
+
+.box-2 .citys{
+    padding-bottom: 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
+.box-2 .citys button{
+    padding: 1.5rem;
+    font-size: 2rem;
+    border: .2rem solid rgb(207, 215, 219);
+    background: none;
+    border-radius: .5rem;
+}
+
+.box-2 .cards-clima{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
+.box-2 .cards-clima .card{
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.box-2 .cards-clima .card .header p{
+    font-size: 2.5rem;
+}
+
+.box-2 .cards-clima .card .footer .title {
+    text-align: center;
+    font-size: 1.6rem;
+}
+
+.box-2 .cards-clima .card .footer p {
+    padding-bottom: 1rem;
+    text-align: center;
+    font-size: 2rem;
+}
+
+/*houvers*/
+
+.box-2 .citys button:hover{
+    transition: .5s;
+    background-color: rgb(72, 142, 248);
+    color: white;
+    border: none;
+}
+
+.box-2 .cards-clima .card:hover{
+    transition: .5s;
+    background-color: rgb(72, 142, 248);
+    color: white;
+}
