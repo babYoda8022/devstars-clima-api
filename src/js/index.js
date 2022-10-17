@@ -10,7 +10,8 @@ const icons = {
     "cloud" : "bx bx-cloud", 
     "cloudLightRain" : "bx bx-cloud-light-rain",
     "cloudRain" : "bx bx-cloud-rain",
-    "cloudLightnig" : "bx bx-cloud-lightning"
+    "cloudLightnig" : "bx bx-cloud-lightning",
+    "cloudBroken": "bx bxs-cloud"
 }
 
 
@@ -19,7 +20,9 @@ buttonSearch.addEventListener("click", ()=>{
     
     creatInfo(requestCity["weather"][0]["description"], 
                 requestCity["main"]["temp"],
-                requestCity["weather"][0]["description"])
+                requestCity["weather"][0]["description"],
+                requestCity["main"]["humidity"],
+                requestCity["wind"]["speed"] )
 })
 
 function getByCity(city){
@@ -32,15 +35,18 @@ function getByCity(city){
     return JSON.parse(request.responseText)
 }
 
-function creatInfo(vSwitch, vTemp, vdescription){
+function creatInfo(vSwitch, vTemp, vdescription, vhumidty, vspeed){
 
     let main = document.querySelectorAll(".main")[0]
     let mainInfo = document.querySelector(".main-info")
     let h1 = document.querySelector("#temp")
     let description = document.querySelector("#description")
     let icon = document.querySelector("#main-icon")
+    let humidity = document.querySelector("#humidity-value")
+    let speed = document.querySelector("#speed-value")
     
     switch(vSwitch){
+        
         case "overcast clouds":
             h1.innerHTML = `${Math.round(vTemp)}°`
             mainInfo.appendChild(h1)        
@@ -48,6 +54,8 @@ function creatInfo(vSwitch, vTemp, vdescription){
             mainInfo.appendChild(icon)
             description.innerHTML = vdescription
             main.appendChild(description)
+            humidity.innerHTML = `${vhumidty}%`
+            speed.innerHTML = `${vspeed}km/h`
             break
         
         case "light rain":
@@ -57,6 +65,8 @@ function creatInfo(vSwitch, vTemp, vdescription){
             mainInfo.appendChild(icon)
             description.innerHTML = vdescription
             main.appendChild(description)
+            humidity.innerHTML = `${vhumidty}%`
+            speed.innerHTML = `${vspeed}km/h`
             break
         
         case "few clouds":
@@ -66,6 +76,8 @@ function creatInfo(vSwitch, vTemp, vdescription){
             mainInfo.appendChild(icon)
             description.innerHTML = vdescription
             main.appendChild(description)
+            humidity.innerHTML = `${vhumidty}%`
+            speed.innerHTML = `${vspeed}km/h`
             break
         
         case "clear sky":
@@ -75,6 +87,33 @@ function creatInfo(vSwitch, vTemp, vdescription){
             mainInfo.appendChild(icon)
             description.innerHTML = vdescription
             main.appendChild(description)
+            humidity.innerHTML = `${vhumidty}%`
+            speed.innerHTML = `${vspeed}km/h`
             break
+
+        case "broken clouds":
+            h1.innerHTML = `${Math.round(vTemp)}°`
+            mainInfo.appendChild(h1)        
+            icon.setAttribute("class", icons["cloudBroken"])
+            mainInfo.appendChild(icon)
+            description.innerHTML = vdescription
+            main.appendChild(description)
+            humidity.innerHTML = `${vhumidty}%`
+            speed.innerHTML = `${vspeed}km/h`
+            break
+
+        case "light intensity shower rain":
+            h1.innerHTML = `${Math.round(vTemp)}°`
+            mainInfo.appendChild(h1)        
+            icon.setAttribute("class", icons["cloudLightnig"])
+            mainInfo.appendChild(icon)
+            description.innerHTML = vdescription
+            main.appendChild(description)
+            humidity.innerHTML = `${vhumidty}%`
+            speed.innerHTML = `${vspeed}km/h`
+            break
+            
     }
 }
+
+console.log(getByCity("Japão"))
