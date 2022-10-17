@@ -15,16 +15,19 @@
             <div class="header">
                 <h1>Your City</h1>
                 <div class="search">
-                    <input type="text" placeholder="Ex: Curitiba">
+                    <input class="input-search" type="text" placeholder="Ex: Curitiba">
+                    <button class="button-search">
+                        <i class='bx bx-search' ></i>
+                    </button>
                 </div>
             </div>
             <div class="main">
                 <p>5:05 PM, Mon, Nov 23,2020</p>
                 <div class="main-info">
-                    <h1>72°</h1>
-                    <i class='bx bx-cloud'></i>
+                    <h1 id="temp">0°</h1>
+                    <i class='bx bx-cloud' id="main-icon"></i>
                 </div>
-                <h1>Cloudy</h1>
+                <h1 id="description">Cloudy</h1>
             </div>
             <div class="footer">
                 <div class="footer-card">
@@ -110,5 +113,6 @@
 
         </div>
     </div>
+    <script src="src/js/index.js"></script>
 </body>
 </html>
