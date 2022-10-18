@@ -5,13 +5,15 @@ const buttonSearch = document.querySelector(".button-search")
 const buttonsCity = document.querySelectorAll(".buttons-city")
 
 const icons = {
-    "sun" : "bi bi-brightness-high",
-    "scateringClouds": "bi bi-clouds",
-    "cloud" : "bi bi-cloud", 
-    "lightRain" : "bi bi-cloud-drizzle",
-    "rain" : "bi bi-cloud-rain",
-    "lightnig" : "bi bi-cloud-lightning-rain",
-    "cloudBroken": "bi bi-cloud-fill",
+    "clear sky": "bi bi-brightness-high",
+    "overcast clouds": "bi bi-cloud",
+    "scattered clouds": "bi bi-clouds",
+    "light rain": "bi bi-cloud-drizzle",
+    "few clouds": "bi bi-cloud",
+    "broken clouds": "bi bi-cloud-fill",
+    "moderate rain": "bi bi-cloud-rain",
+    "light intensity shower rain": "bi bi-cloud-lightning-rain",
+    "light intensity drizzle": "bi bi-cloud-drizzle",
     "mist": "bi bi-cloud-haze"
 }
 
@@ -62,120 +64,17 @@ function creatInfo(vSwitch, vTemp, vdescription, vhumidty, vspeed){
     let humidity = document.querySelector("#humidity-value")
     let speed = document.querySelector("#speed-value")
 
-    //Create Infos
-    switch(vSwitch){
-        
-        case "overcast clouds":
-            h1.innerHTML = `${Math.round(vTemp)}°`
-            mainInfo.appendChild(h1)        
-            icon.setAttribute("class", icons["cloud"])
-            mainInfo.appendChild(icon)
-            description.innerHTML = vdescription
-            main.appendChild(description)
-            humidity.innerHTML = `${vhumidty}%`
-            speed.innerHTML = `${vspeed}km/h`
-            console.log(icon)
-            break
-        
-        case "scattered clouds":
-            h1.innerHTML = `${Math.round(vTemp)}°`
-            mainInfo.appendChild(h1)        
-            icon.setAttribute("class", icons["scateringClouds"])
-            mainInfo.appendChild(icon)
-            description.innerHTML = vdescription
-            main.appendChild(description)
-            humidity.innerHTML = `${vhumidty}%`
-            speed.innerHTML = `${vspeed}km/h`
-            break
-
-        case "light rain":
-            h1.innerHTML = `${Math.round(vTemp)}°`
-            mainInfo.appendChild(h1)        
-            icon.setAttribute("class", icons["lightRain"])
-            mainInfo.appendChild(icon)
-            description.innerHTML = vdescription
-            main.appendChild(description)
-            humidity.innerHTML = `${vhumidty}%`
-            speed.innerHTML = `${vspeed}km/h`
-            break
-        
-        case "few clouds":
-            h1.innerHTML = `${Math.round(vTemp)}°`
-            mainInfo.appendChild(h1)        
-            icon.setAttribute("class", icons["cloud"])
-            mainInfo.appendChild(icon)
-            description.innerHTML = vdescription
-            main.appendChild(description)
-            humidity.innerHTML = `${vhumidty}%`
-            speed.innerHTML = `${vspeed}km/h`
-            break
-        
-        case "clear sky":
-            h1.innerHTML = `${Math.round(vTemp)}°`
-            mainInfo.appendChild(h1)        
-            icon.setAttribute("class", icons["sun"])
-            mainInfo.appendChild(icon)
-            description.innerHTML = vdescription
-            main.appendChild(description)
-            humidity.innerHTML = `${vhumidty}%`
-            speed.innerHTML = `${vspeed}km/h`
-            break
-
-        case "broken clouds":
-            h1.innerHTML = `${Math.round(vTemp)}°`
-            mainInfo.appendChild(h1)        
-            icon.setAttribute("class", icons["cloudBroken"])
-            mainInfo.appendChild(icon)
-            description.innerHTML = vdescription
-            main.appendChild(description)
-            humidity.innerHTML = `${vhumidty}%`
-            speed.innerHTML = `${vspeed}km/h`
-            break
-
-        case "light intensity shower rain":
-            h1.innerHTML = `${Math.round(vTemp)}°`
-            mainInfo.appendChild(h1)        
-            icon.setAttribute("class", icons["lightnig"])
-            mainInfo.appendChild(icon)
-            description.innerHTML = vdescription
-            main.appendChild(description)
-            humidity.innerHTML = `${vhumidty}%`
-            speed.innerHTML = `${vspeed}km/h`
-            break
-
-        case "light intensity drizzle":
-            h1.innerHTML = `${Math.round(vTemp)}°`
-            mainInfo.appendChild(h1)        
-            icon.setAttribute("class", icons["lightRain"])
-            mainInfo.appendChild(icon)
-            description.innerHTML = "drizzle"
-            main.appendChild(description)
-            humidity.innerHTML = `${vhumidty}%`
-            speed.innerHTML = `${vspeed}km/h`
-            break
-        
-        case "moderate rain":
-            h1.innerHTML = `${Math.round(vTemp)}°`
-            mainInfo.appendChild(h1)        
-            icon.setAttribute("class", icons["rain"])
-            mainInfo.appendChild(icon)
-            description.innerHTML = vdescription
-            main.appendChild(description)
-            humidity.innerHTML = `${vhumidty}%`
-            speed.innerHTML = `${vspeed}km/h`
-            break
-
-        case "mist":
-            h1.innerHTML = `${Math.round(vTemp)}°`
-            mainInfo.appendChild(h1)        
-            icon.setAttribute("class", icons["mist"])
-            mainInfo.appendChild(icon)
-            description.innerHTML = vdescription
-            main.appendChild(description)
-            humidity.innerHTML = `${vhumidty}%`
-            speed.innerHTML = `${vspeed}km/h`
-            break
-    }
+    
+    h1.innerHTML = `${Math.round(vTemp)}°`
+    mainInfo.appendChild(h1)        
+    icon.setAttribute("class", icons[vSwitch])
+    mainInfo.appendChild(icon)
+    description.innerHTML = vdescription
+    main.appendChild(description)
+    humidity.innerHTML = `${vhumidty}%`
+    speed.innerHTML = `${vspeed}km/h`
+    console.log(icon)
+    
 }
 
 
