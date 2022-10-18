@@ -4,6 +4,10 @@ const search = document.querySelector(".input-search")
 const buttonSearch = document.querySelector(".button-search")
 const buttonsCity = document.querySelectorAll(".buttons-city")
 
+const fundo = document.querySelector(".fundo")
+const modal = document.querySelector(".modal")
+const modalClose = document.querySelector("#modal-close")
+
 const icons = {
     "clear sky": "bi bi-brightness-high",
     "overcast clouds": "bi bi-cloud",
@@ -17,15 +21,26 @@ const icons = {
     "mist": "bi bi-cloud-haze"
 }
 
+modalClose.addEventListener("click", ()=>{
+    fundo.setAttribute("id", "close")
+    modal.setAttribute("id", "close")
+})
 
 buttonSearch.addEventListener("click", ()=>{
     let requestCity = getInfo(search.value)
+    console.log(requestCity)
     
-    creatInfo(requestCity["weather"][0]["description"], 
-                requestCity["main"]["temp"],
-                requestCity["weather"][0]["description"],
-                requestCity["main"]["humidity"],
-                requestCity["wind"]["speed"] )
+    if(requestCity["cod"] == "404"){
+        fundo.removeAttribute("id")
+        modal.removeAttribute("id")
+    }else{
+        creatInfo(requestCity["weather"][0]["description"], 
+                    requestCity["main"]["temp"],
+                    requestCity["weather"][0]["description"],
+                    requestCity["main"]["humidity"],
+                    requestCity["wind"]["speed"] )
+    }
+                
     search.value = ""
 })
 
@@ -33,6 +48,7 @@ buttonsCity.forEach((value, index)=>{
     
     buttonsCity[index].addEventListener("click", ()=>{
         let requestCity = getInfo(value.innerHTML)
+
         creatInfo(requestCity["weather"][0]["description"], 
         requestCity["main"]["temp"],
         requestCity["weather"][0]["description"],
@@ -73,11 +89,5 @@ function creatInfo(vSwitch, vTemp, vdescription, vhumidty, vspeed){
     main.appendChild(description)
     humidity.innerHTML = `${vhumidty}%`
     speed.innerHTML = `${vspeed}km/h`
-    console.log(icon)
-    
+
 }
-
-
-console.log(getInfo("Joinville"))
-
-//scattered clouds
