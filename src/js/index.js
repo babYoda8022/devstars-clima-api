@@ -8,6 +8,14 @@ const fundo = document.querySelector(".fundo")
 const modal = document.querySelector(".modal")
 const modalClose = document.querySelector("#modal-close")
 
+const pDate = document.querySelector("#date")
+let date = String(new Date()).split(" ")
+console.log(date)
+
+const card = document.querySelectorAll(".card")
+
+pDate.innerHTML = `${date[0]}, ${date[1]}, ${date[2]}/${date[3]}` 
+
 const icons = {
     "clear sky": "bi bi-brightness-high",
     "overcast clouds": "bi bi-cloud",
@@ -26,10 +34,12 @@ modalClose.addEventListener("click", ()=>{
     modal.setAttribute("id", "close")
 })
 
-buttonSearch.addEventListener("click", ()=>{
-    let requestCity = getInfo(search.value)
-    console.log(requestCity)
-    
+buttonSearch.addEventListener("click", async ()=>{
+    let requestCity = await getInfo(search.value)
+    let requestCards = await getDays(search.value)["list"]
+
+    console.log(requestCards)
+
     if(requestCity["cod"] == "404"){
         fundo.removeAttribute("id")
         modal.removeAttribute("id")
@@ -39,6 +49,9 @@ buttonSearch.addEventListener("click", ()=>{
                     requestCity["weather"][0]["description"],
                     requestCity["main"]["humidity"],
                     requestCity["wind"]["speed"] )
+
+        creatInfoCards(requestCards)
+        
     }
                 
     search.value = ""
@@ -46,8 +59,10 @@ buttonSearch.addEventListener("click", ()=>{
 
 buttonsCity.forEach((value, index)=>{
     
-    buttonsCity[index].addEventListener("click", ()=>{
-        let requestCity = getInfo(value.innerHTML)
+    buttonsCity[index].addEventListener("click", async ()=>{
+        let requestCity = await getInfo(value.innerHTML)
+        let requestCards = await getDays(value.innerHTML)["list"]
+        console.log(requestCards)
 
         creatInfo(requestCity["weather"][0]["description"], 
         requestCity["main"]["temp"],
@@ -55,10 +70,12 @@ buttonsCity.forEach((value, index)=>{
         requestCity["main"]["humidity"],
         requestCity["wind"]["speed"] )
 
+        creatInfoCards(requestCards)
     })
 
 });
 
+//Left Infos
 function getInfo(city){
     
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`
@@ -69,9 +86,9 @@ function getInfo(city){
     return JSON.parse(request.responseText)
 }
 
-function creatInfo(vSwitch, vTemp, vdescription, vhumidty, vspeed){
+function creatInfo(vicon, vTemp, vdescription, vhumidty, vspeed){
 
-    //Left Infos
+
     let main = document.querySelectorAll(".main")[0]
     let mainInfo = document.querySelector(".main-info")
     let h1 = document.querySelector("#temp")
@@ -83,7 +100,7 @@ function creatInfo(vSwitch, vTemp, vdescription, vhumidty, vspeed){
     
     h1.innerHTML = `${Math.round(vTemp)}°`
     mainInfo.appendChild(h1)        
-    icon.setAttribute("class", icons[vSwitch])
+    icon.setAttribute("class", icons[vicon])
     mainInfo.appendChild(icon)
     description.innerHTML = vdescription
     main.appendChild(description)
@@ -91,3 +108,47 @@ function creatInfo(vSwitch, vTemp, vdescription, vhumidty, vspeed){
     speed.innerHTML = `${vspeed}km/h`
 
 }
+
+//Right Infos
+
+var daysWeek = ["Sun", "Mon", "Tues", "Wed", "Thu", "Fri", "Sat"]
+
+let week = String(new Date().getDay()).split(" ")[0]
+
+console.log(week)
+
+function getDays(city){
+    url = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apikey}` 
+
+    let request = new XMLHttpRequest()
+    request.open("GET", url, false)
+    request.send()
+    return JSON.parse(request.responseText)
+}
+
+function creatInfoCards(request){ 
+    var num = 9
+    card.forEach((value, index)=>{
+        var day = String(request[index+1]["dt_txt"]).split(" ")[0].split("-")[2]
+        if(index > 0){
+            day = String(request[num]["dt_txt"]).split(" ")[0].split("-")[2]
+            num = num + 9
+            console.log(num)
+        }
+        value.innerHTML = `
+        <div class="header">
+            <p>Day ${day}</p>
+        </div>
+        <div class="main">
+            <i class="${icons[request[index+1]["weather"][0]["description"]]}"></i>
+        </div>
+        <div class="footer">
+            <p class="title">Humidity</p>
+            <p>${request[index+1]["main"]["humidity"]}%</p>
+            <p class="title">Wing speed</p>
+            <p>${request[index+1]["wind"]["speed"]}km/h</p>
+        </div>
+`
+    })
+}
+
